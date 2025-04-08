@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-import { NavbarVisibilityVariant, NavLinks } from "./data";
+import { NavbarVisibilityVariant } from "./variants";
 import {
   ChevronDownIcon,
   CloseIcon,
@@ -20,6 +20,7 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { AppContext } from "./context-provider";
+import { NavLinks } from "./data";
 export const Navbar = () => {
   const { page, setPage } = useContext(AppContext);
 
@@ -78,7 +79,13 @@ export const Navbar = () => {
               "bg-amber-100/95 supports-[backdrop-filter]:bg-linear-to-bl from-amber-100/75  to-amber-50/75 backdrop-blur-md border-b"
           )}
         >
-          <Button variant={"logo"} size={"logo"}>
+          <Button
+            variant={"logo"}
+            size={"logo"}
+            onClick={() => {
+              handlePageChange("Home");
+            }}
+          >
             <Image
               src={"/person.png"}
               alt="user image"
@@ -97,8 +104,13 @@ export const Navbar = () => {
             {mobileNav ? <CloseIcon /> : <MenuIcon />}
           </Button>
           <div className="hidden md:flex gap-2 relative divide-x  ">
-            {NavLinks.map(({ label }) => (
-              <div key={label} className="">
+            {NavLinks.map(({ label }, index) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
                 <Button
                   variant={"link"}
                   disabled={page === label}
@@ -108,7 +120,7 @@ export const Navbar = () => {
                 >
                   {label}
                 </Button>
-              </div>
+              </motion.div>
             ))}
           </div>
         </nav>
@@ -175,7 +187,6 @@ const MobileNavMenu = ({
             ))}
           </div>
           <div className="flex items-center justify-center gap-14 flex-wrap padding py-10">
-            {" "}
             <Link
               href="https://github.com/ashiques-dev"
               target="_blank"

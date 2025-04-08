@@ -3,11 +3,3 @@ export const NavLinks = [
   { label: "Projects" },
   { label: "Languages" },
 ];
-export const NavbarVisibilityVariant = {
-  visible: {
-    y: 0,
-  },
-  hidden: {
-    y: "-80%",
-  },
-};

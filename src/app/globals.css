@@ -18,6 +18,28 @@
       opacity: 0.75;
     }
   }
+
+  --animate-move-profile: move-profile 5s linear infinite alternate;
+
+  @keyframes move-profile {
+    0% {
+      transform: scale(1.05) translate(3%, 1%);
+      opacity: 0.75;
+      filter: blur(1px) grayscale(100%);
+    }
+
+    40% {
+      transform: scale(1) translate(0%, 0);
+      opacity: 1;
+      filter: blur(0px) grayscale(0%);
+    }
+
+    100% {
+      transform: scale(1.1) translate(-3%, 1%) rotate(-3deg);
+      opacity: 0.8;
+      filter: blur(2px) grayscale(100%);
+    }
+  }
 }
 
 @layer base {
