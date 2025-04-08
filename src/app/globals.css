@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-inter: var(--font-inter);
+  --animate-scale-up-down: scale-up-down 0.5s linear;
+  @keyframes scale-up-down {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.5;
+    }
+    75% {
+      transform: scale(1.2);
+      opacity: 0.75;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-stone-500;
+  }
+  body {
+    @apply antialiased font-inter bg-linear-to-bl from-amber-100  to-amber-50 text-stone-950 text-sm min-h-screen;
+  }
+  button {
+    @apply cursor-pointer disabled:cursor-not-allowed;
+  }
+}
+
+@layer components {
+  /* *::-webkit-scrollbar {
+    display: none;
+  } */
+
+  .padding {
+    @apply px-4 md:px-8 lg:px-10;
+  }
+}
