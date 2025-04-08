@@ -87,6 +87,7 @@ export const Navbar = () => {
             }}
           >
             <Image
+              loading="lazy"
               src={"/person.png"}
               alt="user image"
               height={480}

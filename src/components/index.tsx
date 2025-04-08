@@ -3,8 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "./context-provider";
 import { AnimatePresence, motion, MotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
-import { TBluredInText, TEaseInText } from "./types";
+import { TBluredInText, TEaseInText, TProjectCard } from "./types";
 import { characterVariant, easeInTextVariant } from "./variants";
+import { Button, buttonVariants } from "./ui/button";
+import { DjangoProjectsList, nextJsProjectsList } from "./data";
+import Image from "next/image";
+import Link from "next/link";
+import { ChromeIcon, GithubIcon } from "./svg";
 
 export const ProtectedComponets = ({
   children,
@@ -104,5 +109,134 @@ export const MotionContainer = ({
     <motion.div className={className} {...motionProps}>
       {children}
     </motion.div>
+  );
+};
+
+export const ProjectSelector = () => {
+  const { setProject, project } = useContext(AppContext);
+
+  return (
+    <>
+      <div className=" mt-8 flex justify-center gap-2">
+        <Button
+          disabled={project === "Next.Js"}
+          variant={"link"}
+          onClick={() => {
+            setProject("Next.Js");
+          }}
+        >
+          Next.Js
+        </Button>
+        <Button
+          disabled={project === "Django"}
+          variant={"link"}
+          onClick={() => {
+            setProject("Django");
+          }}
+        >
+          Django
+        </Button>
+      </div>
+    </>
+  );
+};
+
+export const ProjectCard = () => {
+  const { project } = useContext(AppContext);
+
+  const projectList: TProjectCard =
+    project === "Next.Js" ? nextJsProjectsList : DjangoProjectsList;
+
+  return (
+    <AnimatePresence mode="wait">
+      <MotionContainer
+        key={project}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mt-10  group/project"
+      >
+        {projectList.map(({ name, description, source, used, src, link }) => (
+          <div
+            key={name}
+            className={cn(
+              "pb-10 grid group-hover/project:not-hover:scale-95 group-hover/project:not-hover:blur-[2px] transition-all duration-300",
+              src
+                ? " gap-6 max-w-2xl lg:max-w-full mx-auto lg:grid-cols-2 "
+                : "max-w-3xl mx-auto"
+            )}
+          >
+            {src && (
+              <MotionContainer
+                initial={{ x: -100, opacity: 0, filter: "blur(10px)" }}
+                whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+                transition={{ duration: 0.5 }}
+                viewport={{
+                  once: true,
+                  amount: 0.5,
+                }}
+                className="h-80 rounded-lg overflow-hidden"
+              >
+                <Image
+                  loading="lazy"
+                  src={src}
+                  alt="project image"
+                  height={720}
+                  width={640}
+                  className="size-full object-top object-cover"
+                />
+              </MotionContainer>
+            )}
+
+            <MotionContainer
+              initial={{ x: 100, opacity: 0, filter: "blur(10px)" }}
+              whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.5 }}
+              viewport={{
+                once: true,
+                amount: 0.5,
+              }}
+              className=""
+            >
+              <h3 className="text-lg font-semibold">{name}</h3>
+              <p className=" font-sans mt-4">{description}</p>
+              <div className="flex flex-wrap gap-x-2 gap-y-4 mt-4 ">
+                {used.map((item) => (
+                  <p
+                    key={item}
+                    className="px-4 py-2 rounded-md bg-amber-200 font-medium whitespace-nowrap"
+                  >
+                    {item}
+                  </p>
+                ))}
+              </div>
+              {(source || link) && (
+                <div className="mt-4 flex gap-2">
+                  {source && (
+                    <Link
+                      target="_blank"
+                      href={source}
+                      className={buttonVariants({ variant: "outline" })}
+                    >
+                      View Source <GithubIcon />
+                    </Link>
+                  )}
+                  {link && (
+                    <Link
+                      target="_blank"
+                      href={link}
+                      className={buttonVariants({ variant: "default" })}
+                    >
+                      Live Demo <ChromeIcon />
+                    </Link>
+                  )}
+                </div>
+              )}
+            </MotionContainer>
+          </div>
+        ))}
+      </MotionContainer>
+    </AnimatePresence>
   );
 };

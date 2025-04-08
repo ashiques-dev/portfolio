@@ -1,4 +1,3 @@
-
 export type TMobileNavMenu = {
   mobileNav: boolean;
   mobileNavButtonClick: () => void;
@@ -13,3 +12,12 @@ export type TBluredInText = {
 };
 
 export type TEaseInText = { word: string; className?: string; top?: boolean };
+
+export type TProjectCard = {
+  name: string;
+  src?: string;
+  link?: string;
+  source?: string;
+  used: string[];
+  description: string;
+}[];
