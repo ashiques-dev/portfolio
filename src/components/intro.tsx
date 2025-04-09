@@ -5,10 +5,11 @@ import {
   EaseInText,
   MotionContainer,
 } from ".";
-import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { DownlaodIcon, GithubIcon } from "./svg";
 import Image from "next/image";
+import { GithubIcon } from "./svg";
+import Link from "next/link";
+import { DownlaodIcon } from "./svg";
+import { buttonVariants } from "./ui/button";
 
 const Intro = () => {
   return (
@@ -47,7 +48,6 @@ const Intro = () => {
           create web solutions that are both visually stunning and technically robust."
           />
         </p>
-
         <MotionContainer
           initial={{ y: 20, opacity: 0, filter: "grayscale(100%) blur(10px)" }}
           whileInView={{ y: 0, opacity: 1, filter: "grayscale(0%) blur(0px)" }}
@@ -56,7 +56,7 @@ const Intro = () => {
             once: true,
             amount: 0.2,
           }}
-          className="flex items-center gap-3 mt-4"
+          className="flex items-center flex-wrap gap-3 mt-4"
         >
           <Link
             href="https://github.com/ashiques-dev"
@@ -73,6 +73,22 @@ const Intro = () => {
           >
             Downlaod CV
             <DownlaodIcon />
+          </Link>
+          <Link
+            download={true}
+            href="mailto:ashiques.dev@gmail.com"
+            target="_blank"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            ashiques.dev@gmail.com
+          </Link>
+          <Link
+            download={true}
+            href="tel:+919487864811 "
+            target="_blank"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            +91 94878 64811
           </Link>
         </MotionContainer>
       </section>

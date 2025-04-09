@@ -76,7 +76,7 @@ export const Navbar = () => {
           className={cn(
             "max-w-6xl mx-auto pt-6 pb-4 padding flex items-center justify-between  ",
             previous > 0 &&
-              "bg-amber-100/95 supports-[backdrop-filter]:bg-linear-to-bl from-amber-100/75  to-amber-50/75 backdrop-blur-md border-b"
+              "bg-linear-to-bl from-amber-100/75  to-amber-50/75 backdrop-blur-md border-b"
           )}
         >
           <Button
