@@ -36,7 +36,7 @@ export const nextJsProjectsList = [
   {
     name: "Arabian Access",
     src: "/arabian-access.png",
-    link: "https://vitabite.vercel.app/",
+    link: "https://arabian-access.vercel.app/",    
     source: "https://github.com/ashiques-dev/arabian-access",
     used: ["Next.Js", "Tailwind Css", "Motion"],
     description: `Arabian Access is a Next.js project designed for an Arabian Access Management Solution, offering a variety of services including digital marketing, accounting, signage, cleaning, office interior redesigning, and more.`,
@@ -44,7 +44,7 @@ export const nextJsProjectsList = [
   {
     name: "VitaBite",
     src: "/vitabite.png",
-    link: "https://arabian-access.vercel.app/",
+    link: "https://vitabite.vercel.app/",
     source: "https://github.com/ashiques-dev/vitabite",
     used: ["Next.Js", "Tailwind Css"],
     description: `Vitabite is a Next.js-powered nutrition website dedicated to promoting health and wellness through expert guidance and quality products. Offering insightful articles, personalized diet plans, and a curated selection of supplements, Vitabite helps users make informed choices for a healthier lifestyle. Whether you're looking to boost your energy, improve your diet, or explore the latest in nutrition science, Vitabite is your trusted source for all things health and wellness.`,
